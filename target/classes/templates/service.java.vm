@@ -1,0 +1,26 @@
+package ${package.Service};
+
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.IService;
+import ${package.Entity}.${entity};
+
+/**
+ * $!{table.comment} 服务类
+ */
+#set ($entityName=$entity.substring(0,1).toLowerCase()+$entity.substring(1))
+#if(${kotlin})
+interface ${table.serviceName} : ${superServiceClass}<${entity}>
+#else
+public interface ${table.serviceName} extends ${superServiceClass}<${entity}> {
+
+   /**
+    * 分页查询
+    * @param page 分页条件
+    * @param ${entityName} 对象
+    * @return 返回结果
+    */
+   IPage<${entity}> page(Page<${entity}> page, ${entity} ${entityName});
+
+}
+#end
